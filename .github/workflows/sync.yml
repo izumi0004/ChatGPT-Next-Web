@@ -18,6 +18,9 @@ jobs:
       # Step 1: run a standard checkout action
       - name: Checkout target repo
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          
 
       # Step 2: run the sync action
       - name: Sync upstream changes
@@ -31,6 +34,9 @@ jobs:
 
           # Set test_mode true to run tests instead of the true action!!
           test_mode: false
+          
+          git_config_pull_rebase: true
+          target_branch_push_args: "--force"
 
       - name: Sync check
         if: failure()
